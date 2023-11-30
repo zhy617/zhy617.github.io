@@ -28,13 +28,32 @@
 <p>在类的定义中，可以对非静态数据成员进行初始化。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> v =<span class="number">30</span>; <span class="comment">// 错误语句，静态数据成员独立于</span></span><br><span class="line"><span class="comment">// 对象而存在</span></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">int</span> w=<span class="number">40</span>; <span class="comment">// 有const 约束，可赋值</span></span><br><span class="line"><span class="type">const</span> <span class="type">static</span> <span class="type">int</span> t =<span class="number">50</span>; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> A::v=<span class="number">30</span>;</span><br></pre></td></tr></table></figure>
 
-<h3 id="L07"><a href="#L07" class="headerlink" title="L07"></a>L07</h3><p>默认拷贝构造函数还存在</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+<h3 id="L07"><a href="#L07" class="headerlink" title="L07"></a>L07</h3><p>默认无参构造函数不存在时默认拷贝构造函数还能存在。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">p=&amp;A::a;</span><br><span class="line"><span class="comment">//不能加括号</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Final Examination</category>
       </categories>
       <tags>
         <tag>CS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CCPC QHD</title>
+    <url>/2023/10/18/CCPC-QHD/</url>
+    <content><![CDATA[<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>经历了空铁联运的折腾，在 9 个多小时后才到秦皇岛，入住贝壳酒店。酒店很破，房卡微弯，一不小心就会掰折。大床房很是宽敞，但水、泡面、纸巾等理应附赠的全都没有，90 块的酒店也就这样吧。<br>晚上去广顺兴，三人吃了240+，我一人就占100+。。。这就是AA制吗</p>
+<p><a href="https://imgse.com/i/piFATLF"><img src="https://z1.ax1x.com/2023/10/20/piFATLF.jpg" alt="piFATLF.jpg"></a></p>
+<p>晚上去酒店旁逛街，东大对面的烧烤摊属实惊到我了，露天烧烤，人声鼎沸，烟火气浓重，可惜没有第二个胃。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>早上不是被闹钟叫醒的，而是阳光直射被亮瞎的。<br>到体育馆找到座位后就把咖啡一饮而尽，之后倒是没犯困。<br>开题，队友秒过 G，我又秒了 J，然后三人对着 A 硬试，也迅速过掉了。<br>之后就进入了喜闻乐见的坐牢环节。<br>首先是我犯大罪，跟榜开 D 后，第一眼就幻视为 CCPC 网络赛的 <a href="https://codeforces.com/gym/104651/problem/L">L</a>，然后死命想不出怎么优化掉一个 log。队友也被我带偏，苦思两小时无果。<br>然后队友想出了一个很正确的贪心做法，但我们不会证明，又不敢写，白白浪费了大好机会。最后还是他提出了一个性质，优化掉一个log，但因为临近结束，心如死灰，最后直接放弃了。<br>中间其实 F 已经想到要 DP 了，但没细想就又去帮忙调 D 了，实在可惜。<br>打铁收尾。<br><a href="https://imgse.com/i/piFEMwQ"><img src="https://z1.ax1x.com/2023/10/20/piFEMwQ.jpg" alt="piFEMwQ.jpg"></a></p>
+<p>说实话，打铁从不在我们考虑之内，但这次也暴露了很多问题。</p>
+<p>第一，可做题太少，板子及高级数据结构掌握不够，只能硬磕传统题。<br>第二，默契不够，沟通不够有效，互相代码不熟悉。<br>第三，不够强硬，不能坚持自己的想法，至少得完整证明。</p>
+<p>之后尽量加训吧，再打铁就要退役了。。。</p>
+<h1 id="Day-1-1"><a href="#Day-1-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>早八好困，直接翘掉了，还好是电路理论：）</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+      <tags>
+        <tag>XCPC</tag>
       </tags>
   </entry>
   <entry>
@@ -79,42 +98,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CSP监考游记</title>
-    <url>/2023/10/20/CSP%E7%9B%91%E8%80%83%E6%B8%B8%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day -1"></a>Day -1</h1><p>一个下午都在 803，说是要主考早点到，但到了也没啥事，还是等监考也来了才开始讲。算了，还好讲完来的及赶晚课。</p>
-<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>下了一个 wsl，运行了一下查重软件，还不错。<br>晚上去南一楼布置考场，纯纯赛博黑奴，要放挡板，理线，测系统，啥都要检查一遍，不给个 1000 说不过去了。<br>去南五楼后还给了夜宵，汉堡+派，十分可口。甚至由于工作到 11 点，人溜光了，最后还剩好几个，我就顺了一袋子回去投喂室友了。</p>
-<h1 id="Day-1-1"><a href="#Day-1-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>上午出大锅。<br>首先由于我脑残，忘记运行 netsh 了，导致最后网络恢复时无法统一提交代码，最后只能一份份手动上传，也不知道选手有没有趁机搞小动作。<br>然后是代码校验程序出锅，没有预料到极域上传文件自带 ip，导致程序出错。。。最后只能手动校验。普及组我们考场 106 个人，检查代码就检查了 30 min+，差点饭都来不及吃。。。<br>普及组题倒是挺正常的。</p>
-<p>有了上午的前车之鉴，下午就正常了许多。<br><a href="https://www.imagehub.cc/image/1g9t3R"><img src="https://s1.imagehub.cc/images/2023/10/26/IMG_20231021_092158.jpeg" alt="IMG_20231021_092158.jpeg"></a><br>一切正常，甚至中途我还去缺考考生座位坐了一会，看了几眼题：<br>T1 简单，T2 不咋会，T3 一眼大模拟直接跳，T4 一眼秒了，就是二分 + 贪心。<br>最后校验和查重也十分顺利，有趣的是这次还真被查出了一个作弊考生，就硬抄前面的代码，删几个空格，也太瞧不起查重软件了吧。</p>
-<p>晚上去泛悦城的安记潮牛猛炫一顿，毕竟报销额度按最顶级 90 元来，更是有顶级大厨亲自服务，不吃白不吃。</p>
-<p><a href="https://www.imagehub.cc/image/1gy1OJ"><img src="https://s1.imagehub.cc/images/2023/10/25/IMG_20231021_210808.jpeg" alt="IMG_20231021_210808.jpeg"></a></p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
-      <tags>
-        <tag>CSP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CCPC QHD</title>
-    <url>/2023/10/18/CCPC-QHD/</url>
-    <content><![CDATA[<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>经历了空铁联运的折腾，在 9 个多小时后才到秦皇岛，入住贝壳酒店。酒店很破，房卡微弯，一不小心就会掰折。大床房很是宽敞，但水、泡面、纸巾等理应附赠的全都没有，90 块的酒店也就这样吧。<br>晚上去广顺兴，三人吃了240+，我一人就占100+。。。这就是AA制吗</p>
-<p><a href="https://imgse.com/i/piFATLF"><img src="https://z1.ax1x.com/2023/10/20/piFATLF.jpg" alt="piFATLF.jpg"></a></p>
-<p>晚上去酒店旁逛街，东大对面的烧烤摊属实惊到我了，露天烧烤，人声鼎沸，烟火气浓重，可惜没有第二个胃。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>早上不是被闹钟叫醒的，而是阳光直射被亮瞎的。<br>到体育馆找到座位后就把咖啡一饮而尽，之后倒是没犯困。<br>开题，队友秒过 G，我又秒了 J，然后三人对着 A 硬试，也迅速过掉了。<br>之后就进入了喜闻乐见的坐牢环节。<br>首先是我犯大罪，跟榜开 D 后，第一眼就幻视为 CCPC 网络赛的 <a href="https://codeforces.com/gym/104651/problem/L">L</a>，然后死命想不出怎么优化掉一个 log。队友也被我带偏，苦思两小时无果。<br>然后队友想出了一个很正确的贪心做法，但我们不会证明，又不敢写，白白浪费了大好机会。最后还是他提出了一个性质，优化掉一个log，但因为临近结束，心如死灰，最后直接放弃了。<br>中间其实 F 已经想到要 DP 了，但没细想就又去帮忙调 D 了，实在可惜。<br>打铁收尾。<br><a href="https://imgse.com/i/piFEMwQ"><img src="https://z1.ax1x.com/2023/10/20/piFEMwQ.jpg" alt="piFEMwQ.jpg"></a></p>
-<p>说实话，打铁从不在我们考虑之内，但这次也暴露了很多问题。</p>
-<p>第一，可做题太少，板子及高级数据结构掌握不够，只能硬磕传统题。<br>第二，默契不够，沟通不够有效，互相代码不熟悉。<br>第三，不够强硬，不能坚持自己的想法，至少得完整证明。</p>
-<p>之后尽量加训吧，再打铁就要退役了。。。</p>
-<h1 id="Day-1-1"><a href="#Day-1-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>早八好困，直接翘掉了，还好是电路理论：）</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
-      <tags>
-        <tag>XCPC</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2023/10/17/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -131,5 +114,22 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>CSP监考游记</title>
+    <url>/2023/10/20/CSP%E7%9B%91%E8%80%83%E6%B8%B8%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day -1"></a>Day -1</h1><p>一个下午都在 803，说是要主考早点到，但到了也没啥事，还是等监考也来了才开始讲。算了，还好讲完来的及赶晚课。</p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>下了一个 wsl，运行了一下查重软件，还不错。<br>晚上去南一楼布置考场，纯纯赛博黑奴，要放挡板，理线，测系统，啥都要检查一遍，不给个 1000 说不过去了。<br>去南五楼后还给了夜宵，汉堡+派，十分可口。甚至由于工作到 11 点，人溜光了，最后还剩好几个，我就顺了一袋子回去投喂室友了。</p>
+<h1 id="Day-1-1"><a href="#Day-1-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>上午出大锅。<br>首先由于我脑残，忘记运行 netsh 了，导致最后网络恢复时无法统一提交代码，最后只能一份份手动上传，也不知道选手有没有趁机搞小动作。<br>然后是代码校验程序出锅，没有预料到极域上传文件自带 ip，导致程序出错。。。最后只能手动校验。普及组我们考场 106 个人，检查代码就检查了 30 min+，差点饭都来不及吃。。。<br>普及组题倒是挺正常的。</p>
+<p>有了上午的前车之鉴，下午就正常了许多。<br><a href="https://www.imagehub.cc/image/1g9t3R"><img src="https://s1.imagehub.cc/images/2023/10/26/IMG_20231021_092158.jpeg" alt="IMG_20231021_092158.jpeg"></a><br>一切正常，甚至中途我还去缺考考生座位坐了一会，看了几眼题：<br>T1 简单，T2 不咋会，T3 一眼大模拟直接跳，T4 一眼秒了，就是二分 + 贪心。<br>最后校验和查重也十分顺利，有趣的是这次还真被查出了一个作弊考生，就硬抄前面的代码，删几个空格，也太瞧不起查重软件了吧。</p>
+<p>晚上去泛悦城的安记潮牛猛炫一顿，毕竟报销额度按最顶级 90 元来，更是有顶级大厨亲自服务，不吃白不吃。</p>
+<p><a href="https://www.imagehub.cc/image/1gy1OJ"><img src="https://s1.imagehub.cc/images/2023/10/25/IMG_20231021_210808.jpeg" alt="IMG_20231021_210808.jpeg"></a></p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+      <tags>
+        <tag>CSP</tag>
+      </tags>
   </entry>
 </search>
