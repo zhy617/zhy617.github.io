@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C++ Review</title>
+    <url>/2023/11/28/C-Review/</url>
+    <content><![CDATA[<h3 id="L02"><a href="#L02" class="headerlink" title="L02"></a>L02</h3><p>一般来说，C++ 中的临时变量在表达式结束之后 (full expression) 就被会销毁，比如前面举的两个栗子，但也有例外的时候，如果这个临时变量被用来初始化一个引用的话，那这个临时变量的生命周期就会被延长，直到引用被销 毁，从而不会因此产生悬空(dangling)的引用。</p>
+<h3 id="L03"><a href="#L03" class="headerlink" title="L03"></a>L03</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> *p[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> (*p)[<span class="number">4</span>];</span><br><span class="line"><span class="comment">//右结合</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="L04"><a href="#L04" class="headerlink" title="L04"></a>L04</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>,&amp;a);</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%f&quot;</span>,a);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> i;<span class="comment">//只是声明未定义</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> i=<span class="number">1</span>;<span class="comment">//等同于定义</span></span><br></pre></td></tr></table></figure>
+
+<p>有址引用能接收有址引用和无址引用。<br>无址引用只能接收无址引用。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> &amp;&amp;w = <span class="number">10</span>;</span><br><span class="line"><span class="comment">//创建了一个临时变量保存10</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhuanlan.zhihu.com/p/354232756">bit_field</a></p>
+<h3 id="L05"><a href="#L05" class="headerlink" title="L05"></a>L05</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">union</span> <span class="title class_">Union</span>&#123;</span><br><span class="line">	<span class="type">int</span> x;</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">f</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a+b+x;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Union a;</span><br><span class="line">    a.x=<span class="number">30</span>;</span><br><span class="line">    <span class="type">int</span> ans=a.<span class="built_in">f</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    <span class="built_in">int</span> (Union::*p)(<span class="type">int</span>,<span class="type">int</span>)=&amp;(Union::f);</span><br><span class="line">    ans=(a.*p)(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="L05-1"><a href="#L05-1" class="headerlink" title="L05"></a>L05</h3><p>delete 释放new分配的单个对象指针指向的内存</p>
+<p>delete[] 释放new分配的对象数组指针指向的内存</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">A *a = <span class="keyword">new</span> A[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">delete</span> a;    </span><br><span class="line"><span class="comment">// 只调用 A[0] 的析构函数</span></span><br></pre></td></tr></table></figure>
+
+<p>delete[] 访问数组前 8 个字节来确定数组长度即调用析构函数次数。</p>
+<p><a href="https://blog.csdn.net/u011555996/article/details/128428224">delete VS delete[]</a></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ARRAY q[<span class="number">5</span>]=&#123;&#123;对象q[<span class="number">0</span>]的构造参数&#125;,……&#125;; </span><br><span class="line">ARRAY q[<span class="number">5</span>]=&#123;<span class="built_in">ARRAY</span>(对象q[<span class="number">0</span>]的构造参数),……&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在类的定义中，可以对非静态数据成员进行初始化。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> v =<span class="number">30</span>; <span class="comment">// 错误语句，静态数据成员独立于</span></span><br><span class="line"><span class="comment">// 对象而存在</span></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">int</span> w=<span class="number">40</span>; <span class="comment">// 有const 约束，可赋值</span></span><br><span class="line"><span class="type">const</span> <span class="type">static</span> <span class="type">int</span> t =<span class="number">50</span>; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> A::v=<span class="number">30</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="L07"><a href="#L07" class="headerlink" title="L07"></a>L07</h3><p>默认拷贝构造函数还存在</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Final Examination</category>
+      </categories>
+      <tags>
+        <tag>CS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CCPC ShenZhen</title>
     <url>/2023/11/14/CCPC-ShenZhen/</url>
     <content><![CDATA[<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>这次学聪明了，订了晚些的火车票，虽然赶火车途中经历了一些波折（找永远没有别人捡得快），但最后还是极限赶上了。</p>
