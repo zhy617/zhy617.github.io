@@ -12,6 +12,9 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> i;<span class="comment">//只是声明未定义</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> i=<span class="number">1</span>;<span class="comment">//等同于定义</span></span><br></pre></td></tr></table></figure>
 
 <p>有址引用能接收有址引用和无址引用。<br>无址引用只能接收无址引用。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">char</span>* &amp;&amp; <span class="title">f</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">char</span>* &amp;&amp;p=<span class="string">&quot;hello&quot;</span>;<span class="comment">// p拷贝了“hello”指针的，p有地址</span></span><br><span class="line">	<span class="keyword">return</span> std::<span class="built_in">move</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// return 的是右值，类型是右值引用。</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">char</span>* &amp;&amp; p = <span class="string">&quot;hello&quot;</span>;<span class="comment">//p 左值，类型是右值引用</span></span><br><span class="line">	<span class="type">char</span>* &amp;q = p;<span class="comment">//q是左值，类型是左值引用</span></span><br><span class="line">	<span class="type">int</span> &amp;&amp;x=<span class="number">20</span>;</span><br><span class="line">	<span class="type">int</span> &amp;y=x;</span><br><span class="line">	<span class="type">int</span> <span class="type">const</span> &amp;w=<span class="number">20</span>;</span><br><span class="line">	<span class="type">char</span>* &amp;&amp; z=<span class="built_in">f</span>();<span class="comment">//函数返回值都是右值。</span></span><br><span class="line">	<span class="type">char</span>* <span class="type">const</span> &amp; zz=<span class="built_in">f</span>();<span class="comment">//f()是一个右值指针，所以类型得是(char* const)</span></span><br><span class="line">	cout&lt;&lt;(&amp;x)&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> &amp;&amp;w = <span class="number">10</span>;</span><br><span class="line"><span class="comment">//创建了一个临时变量保存10</span></span><br></pre></td></tr></table></figure>
 
 <p><a href="https://zhuanlan.zhihu.com/p/354232756">bit_field</a></p>
@@ -29,31 +32,26 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> v =<span class="number">30</span>; <span class="comment">// 错误语句，静态数据成员独立于</span></span><br><span class="line"><span class="comment">// 对象而存在</span></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">int</span> w=<span class="number">40</span>; <span class="comment">// 有const 约束，可赋值</span></span><br><span class="line"><span class="type">const</span> <span class="type">static</span> <span class="type">int</span> t =<span class="number">50</span>; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> A::v=<span class="number">30</span>;</span><br></pre></td></tr></table></figure>
 
 <h3 id="L07"><a href="#L07" class="headerlink" title="L07"></a>L07</h3><p>默认无参构造函数不存在时默认拷贝构造函数还能存在。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">p=&amp;A::a;</span><br><span class="line"><span class="comment">//不能加括号</span></span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">p=&amp;A::a;</span><br><span class="line"><span class="comment">//不能加括号</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="L08"><a href="#L08" class="headerlink" title="L08"></a>L08</h3><p>赋值函数的恰当写法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ClassName &amp; <span class="keyword">operator</span> =(<span class="type">const</span> ClassName &amp;obj);</span><br></pre></td></tr></table></figure>
+<p>加法函数：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ClassName <span class="keyword">operator</span> +(<span class="type">const</span> ClassName &amp;obj) <span class="type">const</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">A &amp;<span class="keyword">operator</span>++( )&#123; a++; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;<span class="comment">//单目，前置运算</span></span><br><span class="line">A <span class="keyword">operator</span>++(<span class="type">int</span>)&#123; <span class="keyword">return</span> <span class="built_in">A</span>(a++); &#125;<span class="comment">//双目，后置运算</span></span><br></pre></td></tr></table></figure>
+
+<p>只能重载成实例成员函数：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">= [] -&gt; ()</span><br></pre></td></tr></table></figure>
+
+<h3 id="L09"><a href="#L09" class="headerlink" title="L09"></a>L09</h3><p>基类的private 派生类不能访问；派生控制的private 派生类可以访问。</p>
+<p>菱形继承（？）</p>
+]]></content>
       <categories>
         <category>Final Examination</category>
       </categories>
       <tags>
         <tag>CS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CCPC QHD</title>
-    <url>/2023/10/18/CCPC-QHD/</url>
-    <content><![CDATA[<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>经历了空铁联运的折腾，在 9 个多小时后才到秦皇岛，入住贝壳酒店。酒店很破，房卡微弯，一不小心就会掰折。大床房很是宽敞，但水、泡面、纸巾等理应附赠的全都没有，90 块的酒店也就这样吧。<br>晚上去广顺兴，三人吃了240+，我一人就占100+。。。这就是AA制吗</p>
-<p><a href="https://imgse.com/i/piFATLF"><img src="https://z1.ax1x.com/2023/10/20/piFATLF.jpg" alt="piFATLF.jpg"></a></p>
-<p>晚上去酒店旁逛街，东大对面的烧烤摊属实惊到我了，露天烧烤，人声鼎沸，烟火气浓重，可惜没有第二个胃。</p>
-<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>早上不是被闹钟叫醒的，而是阳光直射被亮瞎的。<br>到体育馆找到座位后就把咖啡一饮而尽，之后倒是没犯困。<br>开题，队友秒过 G，我又秒了 J，然后三人对着 A 硬试，也迅速过掉了。<br>之后就进入了喜闻乐见的坐牢环节。<br>首先是我犯大罪，跟榜开 D 后，第一眼就幻视为 CCPC 网络赛的 <a href="https://codeforces.com/gym/104651/problem/L">L</a>，然后死命想不出怎么优化掉一个 log。队友也被我带偏，苦思两小时无果。<br>然后队友想出了一个很正确的贪心做法，但我们不会证明，又不敢写，白白浪费了大好机会。最后还是他提出了一个性质，优化掉一个log，但因为临近结束，心如死灰，最后直接放弃了。<br>中间其实 F 已经想到要 DP 了，但没细想就又去帮忙调 D 了，实在可惜。<br>打铁收尾。<br><a href="https://imgse.com/i/piFEMwQ"><img src="https://z1.ax1x.com/2023/10/20/piFEMwQ.jpg" alt="piFEMwQ.jpg"></a></p>
-<p>说实话，打铁从不在我们考虑之内，但这次也暴露了很多问题。</p>
-<p>第一，可做题太少，板子及高级数据结构掌握不够，只能硬磕传统题。<br>第二，默契不够，沟通不够有效，互相代码不熟悉。<br>第三，不够强硬，不能坚持自己的想法，至少得完整证明。</p>
-<p>之后尽量加训吧，再打铁就要退役了。。。</p>
-<h1 id="Day-1-1"><a href="#Day-1-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>早八好困，直接翘掉了，还好是电路理论：）</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
-      <tags>
-        <tag>XCPC</tag>
       </tags>
   </entry>
   <entry>
@@ -95,6 +93,25 @@
       </categories>
       <tags>
         <tag>CF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CCPC QHD</title>
+    <url>/2023/10/18/CCPC-QHD/</url>
+    <content><![CDATA[<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>经历了空铁联运的折腾，在 9 个多小时后才到秦皇岛，入住贝壳酒店。酒店很破，房卡微弯，一不小心就会掰折。大床房很是宽敞，但水、泡面、纸巾等理应附赠的全都没有，90 块的酒店也就这样吧。<br>晚上去广顺兴，三人吃了240+，我一人就占100+。。。这就是AA制吗</p>
+<p><a href="https://imgse.com/i/piFATLF"><img src="https://z1.ax1x.com/2023/10/20/piFATLF.jpg" alt="piFATLF.jpg"></a></p>
+<p>晚上去酒店旁逛街，东大对面的烧烤摊属实惊到我了，露天烧烤，人声鼎沸，烟火气浓重，可惜没有第二个胃。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>早上不是被闹钟叫醒的，而是阳光直射被亮瞎的。<br>到体育馆找到座位后就把咖啡一饮而尽，之后倒是没犯困。<br>开题，队友秒过 G，我又秒了 J，然后三人对着 A 硬试，也迅速过掉了。<br>之后就进入了喜闻乐见的坐牢环节。<br>首先是我犯大罪，跟榜开 D 后，第一眼就幻视为 CCPC 网络赛的 <a href="https://codeforces.com/gym/104651/problem/L">L</a>，然后死命想不出怎么优化掉一个 log。队友也被我带偏，苦思两小时无果。<br>然后队友想出了一个很正确的贪心做法，但我们不会证明，又不敢写，白白浪费了大好机会。最后还是他提出了一个性质，优化掉一个log，但因为临近结束，心如死灰，最后直接放弃了。<br>中间其实 F 已经想到要 DP 了，但没细想就又去帮忙调 D 了，实在可惜。<br>打铁收尾。<br><a href="https://imgse.com/i/piFEMwQ"><img src="https://z1.ax1x.com/2023/10/20/piFEMwQ.jpg" alt="piFEMwQ.jpg"></a></p>
+<p>说实话，打铁从不在我们考虑之内，但这次也暴露了很多问题。</p>
+<p>第一，可做题太少，板子及高级数据结构掌握不够，只能硬磕传统题。<br>第二，默契不够，沟通不够有效，互相代码不熟悉。<br>第三，不够强硬，不能坚持自己的想法，至少得完整证明。</p>
+<p>之后尽量加训吧，再打铁就要退役了。。。</p>
+<h1 id="Day-1-1"><a href="#Day-1-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>早八好困，直接翘掉了，还好是电路理论：）</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+      <tags>
+        <tag>XCPC</tag>
       </tags>
   </entry>
   <entry>
